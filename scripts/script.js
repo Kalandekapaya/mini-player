@@ -90,6 +90,8 @@ new Vue({
   methods: {
 
     play(track) {
+
+      //normal pause and play
       if (this.audio.paused) {
         this.audio.play();
         this.isTimerPlaying = true;
@@ -98,7 +100,8 @@ new Vue({
         this.isTimerPlaying = false;
       }
 
-
+      this.changeCover();
+      this.transitionName = "scale-in";
       //select the audio and start playing
       if (typeof track.src != "undefined") {
         this.currentTrack = track;
@@ -110,7 +113,6 @@ new Vue({
           this.audio.pause();
           this.isTimerPlaying = false;
         }
-  
       }
     },
     generateTime() {
@@ -157,9 +159,12 @@ new Vue({
       this.audio.pause();
       this.updateBar(e.pageX);
     },
+    changeCover(){
+      this.isShowCover = false;
+    },
     prevTrack() {
       this.transitionName = "scale-in";
-      this.isShowCover = false;
+      this.changeCover();
       if (this.currentTrackIndex > 0) {
         this.currentTrackIndex--;
       } else {
@@ -170,7 +175,7 @@ new Vue({
     },
     nextTrack() {
       this.transitionName = "scale-out";
-      this.isShowCover = false;
+      this.changeCover();
       if (this.currentTrackIndex < this.tracks.length - 1) {
         this.currentTrackIndex++;
       } else {
@@ -200,7 +205,7 @@ new Vue({
   },
   created() {
       // adding artist info
-      //this.current = this.tracks[this.index];
+      // this.current = this.tracks[this.index];
       
     let vm = this;
     this.currentTrack = this.tracks[0];

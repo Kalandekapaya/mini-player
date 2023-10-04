@@ -69,7 +69,9 @@
         <div style="display: list-item;
         ">
           <button style="display: list-item; width: 25vw;
-          " v-for="(track, name) in tracks" :key="track" @click="play(track)"> {{ track.name }} - {{ track.artist }}
+          " v-for="track in tracks" :key="track.id" @click="play(track)">
+          <img v-bind:src="track.cover" style="height: 10px;" alt="cover art">
+          {{ track.name }} - {{ track.artist }}
         </button>
         </div>
         
@@ -131,6 +133,7 @@
       </defs>
     </svg>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./scripts/script.js"></script>
   </body>
 </html>
